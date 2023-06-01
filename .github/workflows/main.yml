@@ -24,10 +24,10 @@ jobs:
         bundle install --path vendor/bundle
         
     - name: Convert AsciiDoc to HTML
-      run: bundle exec asciidoctor -o repo.html repo.adoc
+      run: bundle exec asciidoctor -o /tmp/repo.html repo.adoc
     
-    - name: Copy HTML file to repository
-      run: cp -f repo.html $GITHUB_WORKSPACE/repo.html
+    - name: Move HTML file to repository
+      run: mv -f /tmp/repo.html $GITHUB_WORKSPACE/repo.html
         
     - name: Commit and push HTML file
       run: |
