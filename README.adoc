@@ -1,21 +1,15 @@
-= Inhaltsverzeichnis
+= README
 
-1. <<einleitung>> 
-2. <<installation>> 
-3. <<verwendung>> 
+include::inhalt.adoc[]
 
-  
-[[einleitung]]
 == Einleitung
 
 Hier können Sie eine Einleitung zu Ihrem Projekt geben.
 
-[[installation]]
 == Installation
 
 Folgen Sie diesen Schritten, um das Projekt zu installieren.
 
-[[verwendung]]
 == Verwendung
 
 Hier wird erklärt, wie man das Projekt verwendet.
