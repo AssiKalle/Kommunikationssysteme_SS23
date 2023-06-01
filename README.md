@@ -1,16 +1,15 @@
 # Inhaltsverzeichnis
 
-## 1. Einführung
-  - Ziel des Projekts
-  - Voraussetzungen und Installation
-  - Projektstruktur und Dateiübersicht
+1. [Einleitung](#einleitung)
+2. [Installation](#installation)
+3. [Verwendung](#verwendung)
 
-## 2. Anleitung zur Verwendung
-  - Konfiguration und Anpassung
-  - Grundlegende Funktionen
-  - Erweiterte Funktionen und Optionen
 
-## 3. Beitrag zur Entwicklung
-  - Mitwirkung und Unterstützung
-  - Fehlerberichte und Verbesserungsvorschläge
-  - Codebeiträge und Pull-Anfragen
+## Einleitung
+Hier können Sie eine Einleitung zu Ihrem Projekt geben.
+
+## Installation
+Folgen Sie diesen Schritten, um das Projekt zu installieren.
+
+## Verwendung
+Hier wird erklärt, wie man das Projekt verwendet.
