@@ -19,13 +19,15 @@ jobs:
         ruby-version: 2.7
         
     - name: Install dependencies
-      run: bundle install --path vendor/bundle
+      run: |
+        gem install bundler --user-install
+        bundle install --path vendor/bundle
         
     - name: Convert AsciiDoc to HTML
       run: bundle exec asciidoctor -o repo.html repo.adoc
     
     - name: Copy HTML file to repository
-      run: cp repo.html $GITHUB_WORKSPACE/repo.html
+      run: cp -f repo.html $GITHUB_WORKSPACE/repo.html
         
     - name: Commit and push HTML file
       run: |
