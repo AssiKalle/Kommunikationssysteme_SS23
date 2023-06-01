@@ -21,6 +21,10 @@ jobs:
       run: |
         asciidoctor -o repo.html repo.adoc
     
+    - name: Copy HTML file to repository
+      run: |
+        cp repo.html $GITHUB_WORKSPACE/repo.html
+        
     - name: Commit and push HTML file
       run: |
         git config --local user.email "action@github.com"
