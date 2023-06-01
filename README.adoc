@@ -1,6 +1,6 @@
 = README
 
-include::inhalt.adoc[]
+include::repo.adoc[]
 
 == Einleitung
 
