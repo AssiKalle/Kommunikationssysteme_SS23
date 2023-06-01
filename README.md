@@ -1,16 +1,16 @@
 # Inhaltsverzeichnis
 
-- Einführung
+1.[ Einführung]
   - Ziel des Projekts
   - Voraussetzungen und Installation
   - Projektstruktur und Dateiübersicht
 
-- Anleitung zur Verwendung
+2. [Anleitung zur Verwendung]
   - Konfiguration und Anpassung
   - Grundlegende Funktionen
   - Erweiterte Funktionen und Optionen
 
-- Beitrag zur Entwicklung
+3. [Beitrag zur Entwicklung]
   - Mitwirkung und Unterstützung
   - Fehlerberichte und Verbesserungsvorschläge
   - Codebeiträge und Pull-Anfragen
