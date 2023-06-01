@@ -5,7 +5,7 @@
 3. <<verwendung>> Verwendung
 
   
-  [[einleitung]]
+[[einleitung]]
 == Einleitung
 
 Hier können Sie eine Einleitung zu Ihrem Projekt geben.
