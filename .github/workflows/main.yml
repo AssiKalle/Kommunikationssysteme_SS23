@@ -13,13 +13,19 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
     
-    - name: Install Asciidoctor
+    - name: Set up Ruby environment
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7
+        
+    - name: Install dependencies
       run: |
-        gem install asciidoctor --user-install
+        gem install bundler --user-install
+        bundle install
         
     - name: Convert AsciiDoc to HTML
       run: |
-        /usr/bin/asciidoctor -o repo.html repo.adoc
+        bundle exec asciidoctor -o repo.html repo.adoc
     
     - name: Copy HTML file to repository
       run: |
