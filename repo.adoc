@@ -10,4 +10,4 @@ Hier etwas was zur Installation
 
 [[verwendung]]
 == Verwendung
-Hier finden wir was zur Verwendung 
+Hier finden wir was zur Verwendung des
