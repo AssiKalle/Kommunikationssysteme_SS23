@@ -1,15 +1,21 @@
-# Inhaltsverzeichnis
+= Inhaltsverzeichnis
 
-1. [Einleitung](#einleitung)
-2. [Installation](#installation)
-3. [Verwendung](#verwendung)
+1. <<einleitung>> Einleitung
+2. <<installation>> Installation
+3. <<verwendung>> Verwendung
 
+  
+  [[einleitung]]
+== Einleitung
 
-## Einleitung
 Hier können Sie eine Einleitung zu Ihrem Projekt geben.
 
-## Installation
+[[installation]]
+== Installation
+
 Folgen Sie diesen Schritten, um das Projekt zu installieren.
 
-## Verwendung
+[[verwendung]]
+== Verwendung
+
 Hier wird erklärt, wie man das Projekt verwendet.
