@@ -1,0 +1,34 @@
+name: Asciidoc to HTML
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7
+
+    - name: Install Asciidoctor
+      run: gem install asciidoctor
+
+    - name: Convert Asciidoc to HTML
+      run: asciidoctor repo.adoc
+
+    - name: Rename HTML file
+      run: mv repo.html index.html
+
+    - name: Deploy HTML page
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./
