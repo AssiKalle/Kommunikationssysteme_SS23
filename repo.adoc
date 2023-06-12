@@ -11,9 +11,9 @@ Hier sehen sie den groben Aufbau des Projekts
 image::Aufbau_Projekt.png[]
 
 Die einzelnen Banana Pi's haben folgende IP-Adressen:
-.Controller: 195.37.88.189 -p 22300
-.BannanPi1: 192.168.2.3
-.BannanPi1: 192.168.2.2
+. Controller: 195.37.88.189 -p 22300
+. BannanPi1: 192.168.2.3
+. BannanPi1: 192.168.2.2
 
 [[verwendung]]
 == Verwendung
