@@ -8,6 +8,9 @@ Hier steht die Einleitung
 == Installation
 Hier etwas was zur Installation
 
+image::Aufbau_Projekt.png[]
+
+
 [[verwendung]]
 == Verwendung
 Hier finden wir was zur Verwendung 
