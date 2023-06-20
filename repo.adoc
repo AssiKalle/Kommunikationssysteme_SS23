@@ -24,6 +24,19 @@ Die einzelnen Banana Pi's haben folgende IP-Adressen:
 |192.168.2.3
 |=== 
 
+=== [underline]#BannanPi Wifi Konfiguration:# +
+BannanPi1 => Access Point +
+BannanPi2 => Station 
+
+|===
+| channel | 149
+| mode | VHT80
+| ssid | scux_shielding
+| security | psk2
+| password | Meshlab2021!
+|===
+
+
 [[verwendung]]
 == Verwendung
 Hier finden wir was zur Verwendung 
