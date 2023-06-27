@@ -31,6 +31,7 @@ jobs:
         
     - name: Commit and push HTML file
       run: |
+        git config --local user.email "valerius.begau@gmail.com"
         git config --local user.name "AssiKalle"
         git add repo.html
         git commit -m "Convert AsciiDoc to HTML"
