@@ -24,18 +24,69 @@ Die einzelnen Banana Pi's haben folgende IP-Adressen:
 |192.168.2.3
 |=== 
 
-=== [underline]#BannanPi Wifi Konfiguration:# +
-BannanPi1 => Access Point +
-BannanPi2 => Station 
-
+=== BannanPi1 (Access Point): +
+==== Schritt 1:
+Bearbeiten der Konfigurationsdatei: _/etc/config/wireless_ +
+unter _config wifi-device 'radio0'_ folgende Parameter ändern: 
 |===
-| channel | 149
-| mode | VHT80
-| ssid | scux_shielding
-| security | psk2
-| password | Meshlab2021!
+| option channel | 149
+| option mode | VHT80
+| option disabled | 0
 |===
+unter _wifi-iface 'default_radio0'_ Folgende Parameter ändern:
+|===
+|option network | wifi_1
+|option mode | ap        
+|option ssid | scux_shielding
+|option encryption | psk2
+|option key | Meshlab2021!
+|===
+mit _option disabled '1'_ das zweite Interface _wifi-device 'radio1'_ ausschalten
 
+==== Schritt 2:
+Bearbeiten der Konfigurationsdatei: _/etc/config/network_ +
+hier legen ein neues Interface an: +
+[listing]
+----
+config interface 'wifi_1' 
+        option proto 'static'
+        option netmask '255.255.255.0' 
+        option ipaddr '10.10.10.1'
+----
+
+=== BannanPi2 (Station): +
+==== Schritt 1:
+Bearbeiten der Konfigurationsdatei: _/etc/config/wireless_ +
+unter _config wifi-device 'radio0'_ folgende Parameter ändern: 
+|===
+| option channel | 149
+| option mode | VHT80
+| option disabled | 0
+|===
+unter _wifi-iface 'default_radio0'_ Folgende Parameter ändern:
+|===
+|option network | wifi_1
+|option mode | sta        
+|option ssid | scux_shielding
+|option encryption | psk2
+|option key | Meshlab2021!
+|===
+mit _option disabled '1'_ das zweite Interface _wifi-device 'radio1'_ ausschalten
+
+==== Schritt 2:
+Bearbeiten der Konfigurationsdatei: _/etc/config/network_ +
+hier legen ein neues Interface an: +
+[listing]
+----
+config interface 'wifi_1' 
+        option proto 'static'
+        option netmask '255.255.255.0' 
+        option ipaddr '10.10.10.2'
+----
+=== Controller
+
+
+=== Attenuator
 Der Attenuator fungiert als Kontrollmechanismus, um gezielt den WLAN-Verkehr zu beeinflussen und verschiedene Szenarien zu simulieren. Durch die systematische Anpassung der Dämpfungseinstellungen können verschiedene Verbindungsszenarien getestet werden, um die Auswirkungen auf die Übertragungsgeschwindigkeit zu analysieren.
 
 
