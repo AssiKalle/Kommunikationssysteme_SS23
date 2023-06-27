@@ -2,14 +2,21 @@
 
 include::repo.adoc[]
 
-== Einleitung
+# scnx shielding box
+Kommunikationssysteme Repository Sommersemester 23 
 
-Hier können Sie eine Einleitung zu Ihrem Projekt geben.
+```
+ __   __  _______  _______  __   __  ___      _______  _______  
+|  |_|  ||       ||       ||  | |  ||   |    |   _   ||  _    | 
+|       ||    ___||  _____||  |_|  ||   |    |  |_|  || |_|   |
+|       ||   |___ | |_____ |       ||   |    |       ||       |
+|       ||    ___||_____  ||       ||   |___ |       ||  _   |
+| ||_|| ||   |___  _____| ||   _   ||       ||   _   || |_|   |
+|_|   |_||_______||_______||__| |__||_______||__| |__||_______|
+```
 
-== Installation
+**...our seminar/lecture repository of the communication systems group MeshLab @HS-Nodhausen**
 
-Folgen Sie diesen Schritten, um das Projekt zu installieren.
+## MeshLab - Networking Seminar & Material
 
-== Verwendung
-
-Hier wird erklärt, wie man das Projekt verwendet.
+This repository provides sofware tools and documentation used in the communication systems course at HSN (Nordhausen - University of Applied Sciences).
