@@ -36,6 +36,8 @@ BannanPi2 => Station
 | password | Meshlab2021!
 |===
 
+Der Attenuator fungiert als Kontrollmechanismus, um gezielt den WLAN-Verkehr zu beeinflussen und verschiedene Szenarien zu simulieren. Durch die systematische Anpassung der Dämpfungseinstellungen können verschiedene Verbindungsszenarien getestet werden, um die Auswirkungen auf die Übertragungsgeschwindigkeit zu analysieren.
+
 
 [[verwendung]]
 == Verwendung
