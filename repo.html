@@ -481,10 +481,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="_bannanpi_wifi_konfiguration"><span class="underline">BannanPi Wifi Konfiguration:</span><br></h3>
+<h3 id="_bannanpi1_access_point">BannanPi1 (Access Point):<br></h3>
+<div class="sect3">
+<h4 id="_schritt_1">Schritt 1:</h4>
 <div class="paragraph">
-<p>BannanPi1 &#8658; Access Point<br>
-BannanPi2 &#8658; Station</p>
+<p>Bearbeiten der Konfigurationsdatei: <em>/etc/config/wireless</em><br>
+unter <em>config wifi-device 'radio0'</em> folgende Parameter ändern:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -493,27 +495,155 @@ BannanPi2 &#8658; Station</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">channel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">option channel</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">149</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">mode</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">option mode</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">VHT80</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ssid</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">option disabled</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>unter <em>wifi-iface 'default_radio0'</em> Folgende Parameter ändern:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">option network</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">wifi_1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">option mode</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ap</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">option ssid</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">scux_shielding</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">security</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">option encryption</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">psk2</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">password</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">option key</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Meshlab2021!</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>mit <em>option disabled '1'</em> das zweite Interface <em>wifi-device 'radio1'</em> ausschalten</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_schritt_2">Schritt 2:</h4>
+<div class="paragraph">
+<p>Bearbeiten der Konfigurationsdatei: <em>/etc/config/network</em><br>
+hier legen ein neues Interface an:<br></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>config interface 'wifi_1'
+        option proto 'static'
+        option netmask '255.255.255.0'
+        option ipaddr '10.10.10.1'</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_bannanpi2_station">BannanPi2 (Station):<br></h3>
+<div class="sect3">
+<h4 id="_schritt_1_2">Schritt 1:</h4>
+<div class="paragraph">
+<p>Bearbeiten der Konfigurationsdatei: <em>/etc/config/wireless</em><br>
+unter <em>config wifi-device 'radio0'</em> folgende Parameter ändern:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">option channel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">149</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">option mode</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">VHT80</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">option disabled</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>unter <em>wifi-iface 'default_radio0'</em> Folgende Parameter ändern:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">option network</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">wifi_1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">option mode</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sta</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">option ssid</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">scux_shielding</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">option encryption</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">psk2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">option key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meshlab2021!</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>mit <em>option disabled '1'</em> das zweite Interface <em>wifi-device 'radio1'</em> ausschalten</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_schritt_2_2">Schritt 2:</h4>
+<div class="paragraph">
+<p>Bearbeiten der Konfigurationsdatei: <em>/etc/config/network</em><br>
+hier legen ein neues Interface an:<br></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>config interface 'wifi_1'
+        option proto 'static'
+        option netmask '255.255.255.0'
+        option ipaddr '10.10.10.2'</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_controller">Controller</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_attenuator">Attenuator</h3>
 <div class="paragraph">
 <p>Der Attenuator fungiert als Kontrollmechanismus, um gezielt den WLAN-Verkehr zu beeinflussen und verschiedene Szenarien zu simulieren. Durch die systematische Anpassung der Dämpfungseinstellungen können verschiedene Verbindungsszenarien getestet werden, um die Auswirkungen auf die Übertragungsgeschwindigkeit zu analysieren.</p>
 </div>
@@ -534,7 +664,7 @@ BannanPi2 &#8658; Station</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-06-27 11:22:06 UTC
+Last updated 2023-06-27 22:58:29 UTC
 </div>
 </div>
 </body>
