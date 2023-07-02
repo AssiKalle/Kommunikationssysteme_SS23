@@ -24,15 +24,15 @@ jobs:
         bundle install --path vendor/bundle
         
     - name: Convert AsciiDoc to HTML
-      run: bundle exec asciidoctor -o /tmp/repo.html repo.adoc
+      run: bundle exec asciidoctor -o /tmp/index.html repo.adoc
     
     - name: Move HTML file to repository
-      run: mv -f /tmp/repo.html $GITHUB_WORKSPACE/repo.html
+      run: mv -f /tmp/index.html $GITHUB_WORKSPACE/index.html
         
     - name: Commit and push HTML file
       run: |
         git config --local user.email "valerius.begau@gmail.com"
         git config --local user.name "AssiKalle"
-        git add repo.html
+        git add index.html
         git commit -m "Convert AsciiDoc to HTML"
         git push
