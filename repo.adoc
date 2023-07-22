@@ -15,13 +15,13 @@ Die einzelnen Banana Pi's haben folgende IP-Adressen:
 [cols="1,1"]
 |===
 |Controller
-|195.37.88.189 -p 22300
+|10.10.10.2
 
 |BannanPi1
-|192.168.2.2
+|10.10.2.2
 
 |BannanPi2
-|192.168.2.3
+|10.10.1.2
 |=== 
 
 === BannanPi1 (Access Point): +
@@ -48,10 +48,20 @@ Bearbeiten der Konfigurationsdatei: _/etc/config/network_ +
 hier legen ein neues Interface an: +
 [listing]
 ----
-config interface 'wifi_1' 
+config interface 'wifi_1'
         option proto 'static'
-        option netmask '255.255.255.0' 
-        option ipaddr '10.10.10.1'
+        option netmask '255.255.255.0'
+        option ipaddr '10.100.10.1
+----
+
+==== Schritt 3:
+Zusätzlich haben wir noch eine Route in der _etc/config/network festgelgt_ um den Verkehr über die Wlan-Strecke zu leiten
+----
+config route 'use_wifi'
+        option interface 'wifi_1'
+        option target '10.10.1.0'
+        option netmask '255.255.255.0'
+        option gateway '10.100.10.2'
 ----
 
 === BannanPi2 (Station): +
@@ -78,13 +88,58 @@ Bearbeiten der Konfigurationsdatei: _/etc/config/network_ +
 hier legen ein neues Interface an: +
 [listing]
 ----
-config interface 'wifi_1' 
+config interface 'wifi_1'
         option proto 'static'
-        option netmask '255.255.255.0' 
-        option ipaddr '10.10.10.2'
+        option netmask '255.255.255.0'
+        option ipaddr '10.100.10.2'
 ----
-=== Controller
 
+==== Schritt 3:
+Zusätzlich haben wir noch eine Route in der _etc/config/network_ festgelgt um den Verkehr über die Wlan-Strecke zu leiten
+----
+config route 'use_wifi'
+        option interface 'wifi_1'
+        option target '10.10.2.0'
+        option netmask '255.255.255.0'
+        option gateway '10.100.10.1'
+----
+
+=== Controller
+Um die Verbindung mit iPerf3, mit hilfe von Namespaces, messen zu können müssen wir zunächst 2 Netzwerk-Interfaces anlegen. Diese sind nur für die Strecke zwischen dem Controller und dem Pi1 bzw. Pi2 zuständig. +
+Die beiden Interfaces legen wir in der _etc/config/network_ des Controllers an:
+----
+config interface 'Pi1'
+        option device 'lan2'
+        option proto 'static'
+        option ipaddr '10.10.2.1'
+        option netmask '255.255.255.0'
+
+config interface 'Pi2'
+        option device 'lan4'
+        option proto 'static'
+        option ipaddr '10.10.1.1'
+        option netmask '255.255.255.0'
+----
+
+=== Namespaces 
+Da wir den Wlan-Verkehr zwischen den beiden BananaPi's mit verschiedenen Dämpfungswerten messen möchten, führen wir die Messungen in sogenannten Namespaces aus da der Controller somit sowohl als iPerf3 Server als auch als Client verwendet werden kann. Da wir später noch die Dämpfungen über den mit dem Controller ansteuerbaren Attenuator ändern wollen, ist dies eine gute Möglichkeit. 
+
+==== Schritt 1: Namespaces anlegen:
+Als erstes legen wir den Namespaces für den Server (BananaPi1) fest:
+----
+ip netns add server
+ip link add ul-server link lan2 type macvlan mode bridge
+ip link set dev ul-server netns server
+ip netns exec server ip l set ul-server up
+----
+
+wen wir das haben legen wir noch einen zweiten Namespace für den Client (BananaPi2) an:
+----
+ip netns add client
+ip link add ul-client link lan4 type macvlan mode bridge
+ip link set dev ul-client netns client
+ip netns exec client ip l set ul-client up
+----
 
 === Attenuator
 Der Attenuator fungiert als Kontrollmechanismus, um gezielt den WLAN-Verkehr zu beeinflussen und verschiedene Szenarien zu simulieren. Durch die systematische Anpassung der Dämpfungseinstellungen können verschiedene Verbindungsszenarien getestet werden, um die Auswirkungen auf die Übertragungsgeschwindigkeit zu analysieren.
