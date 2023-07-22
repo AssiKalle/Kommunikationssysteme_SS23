@@ -468,15 +468,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Controller</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">195.37.88.189 -p 22300</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10.10.10.2</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">BannanPi1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">192.168.2.2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10.10.2.2</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">BannanPi2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">192.168.2.3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10.10.1.2</p></td>
 </tr>
 </tbody>
 </table>
@@ -554,7 +554,22 @@ hier legen ein neues Interface an:<br></p>
 <pre>config interface 'wifi_1'
         option proto 'static'
         option netmask '255.255.255.0'
-        option ipaddr '10.10.10.1'</pre>
+        option ipaddr '10.100.10.1</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_schritt_3">Schritt 3:</h4>
+<div class="paragraph">
+<p>Zusätzlich haben wir noch eine Route in der <em>etc/config/network festgelgt</em> um den Verkehr über die Wlan-Strecke zu leiten</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>config route 'use_wifi'
+        option interface 'wifi_1'
+        option target '10.10.1.0'
+        option netmask '255.255.255.0'
+        option gateway '10.100.10.2'</pre>
 </div>
 </div>
 </div>
@@ -633,14 +648,78 @@ hier legen ein neues Interface an:<br></p>
 <pre>config interface 'wifi_1'
         option proto 'static'
         option netmask '255.255.255.0'
-        option ipaddr '10.10.10.2'</pre>
+        option ipaddr '10.100.10.2'</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_schritt_3_2">Schritt 3:</h4>
+<div class="paragraph">
+<p>Zusätzlich haben wir noch eine Route in der <em>etc/config/network</em> festgelgt um den Verkehr über die Wlan-Strecke zu leiten</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>config route 'use_wifi'
+        option interface 'wifi_1'
+        option target '10.10.2.0'
+        option netmask '255.255.255.0'
+        option gateway '10.100.10.1'</pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_controller">Controller</h3>
+<div class="paragraph">
+<p>Um die Verbindung mit iPerf3, mit hilfe von Namespaces, messen zu können müssen wir zunächst 2 Netzwerk-Interfaces anlegen. Diese sind nur für die Strecke zwischen dem Controller und dem Pi1 bzw. Pi2 zuständig.<br>
+Die beiden Interfaces legen wir in der <em>etc/config/network</em> des Controllers an:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>config interface 'Pi1'
+        option device 'lan2'
+        option proto 'static'
+        option ipaddr '10.10.2.1'
+        option netmask '255.255.255.0'
 
+config interface 'Pi2'
+        option device 'lan4'
+        option proto 'static'
+        option ipaddr '10.10.1.1'
+        option netmask '255.255.255.0'</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_namespaces">Namespaces</h3>
+<div class="paragraph">
+<p>Da wir den Wlan-Verkehr zwischen den beiden BananaPi&#8217;s mit verschiedenen Dämpfungswerten messen möchten, führen wir die Messungen in sogenannten Namespaces aus da der Controller somit sowohl als iPerf3 Server als auch als Client verwendet werden kann. Da wir später noch die Dämpfungen über den mit dem Controller ansteuerbaren Attenuator ändern wollen, ist dies eine gute Möglichkeit.</p>
+</div>
+<div class="sect3">
+<h4 id="_schritt_1_namespaces_anlegen">Schritt 1: Namespaces anlegen:</h4>
+<div class="paragraph">
+<p>Als erstes legen wir den Namespaces für den Server (BananaPi1) fest:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>ip netns add server
+ip link add ul-server link lan2 type macvlan mode bridge
+ip link set dev ul-server netns server
+ip netns exec server ip l set ul-server up</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>wen wir das haben legen wir noch einen zweiten Namespace für den Client (BananaPi2) an:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>ip netns add client
+ip link add ul-client link lan4 type macvlan mode bridge
+ip link set dev ul-client netns client
+ip netns exec client ip l set ul-client up</pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_attenuator">Attenuator</h3>
@@ -664,7 +743,7 @@ hier legen ein neues Interface an:<br></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-07-02 14:48:04 UTC
+Last updated 2023-07-22 15:05:53 UTC
 </div>
 </div>
 </body>
