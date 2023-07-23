@@ -457,6 +457,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <img src="Aufbau_Projekt.PNG" alt="Aufbau Projekt">
 </div>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="Aufbau_Projekt2.PNG" alt="Aufbau Projekt2">
+</div>
+</div>
 <div class="paragraph">
 <p>Die einzelnen Banana Pi&#8217;s haben folgende IP-Adressen:</p>
 </div>
@@ -709,7 +714,7 @@ ip netns exec server ip l set ul-server up</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>wen wir das haben legen wir noch einen zweiten Namespace für den Client (BananaPi2) an:</p>
+<p>Jetzt legen wir noch einen zweiten Namespace für den Client (BananaPi2) an:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -717,6 +722,24 @@ ip netns exec server ip l set ul-server up</pre>
 ip link add ul-client link lan4 type macvlan mode bridge
 ip link set dev ul-client netns client
 ip netns exec client ip l set ul-client up</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Wenn beide Namespaces eingerichtet sind, weisen wir den Interfaces ul-server und ul-client noch IP-Adressen zu.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>ip netns exec server ip a add 10.10.2.1/24 dev ul-server
+ip netns exec client ip a add 10.10.1.1/24 dev ul-client</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>zusätlich zu den IP-Adressen müssen noch Routen für die Umleitung des Datenverkehrs für die Namespaces eingerichtet werden. Dies machen wir über folgende Befehle:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>ip netns exec client ip r add 10.10.2.0/24 via 10.10.1.2
+ip netns exec server ip r add 10.10.1.0/24 via 10.10.2.2</pre>
 </div>
 </div>
 </div>
@@ -743,7 +766,7 @@ ip netns exec client ip l set ul-client up</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-07-22 15:05:53 UTC
+Last updated 2023-07-23 12:33:13 UTC
 </div>
 </div>
 </body>
