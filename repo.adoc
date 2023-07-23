@@ -9,6 +9,7 @@ Das vorliegende Experiment befasst sich mit der Untersuchung der optimalen WLAN-
 Hier sehen sie den groben Aufbau des Projekts
 
 image::Aufbau_Projekt.PNG[]
+image::Aufbau_Projekt2.PNG[]
 
 Die einzelnen Banana Pi's haben folgende IP-Adressen:
 
@@ -133,12 +134,24 @@ ip link set dev ul-server netns server
 ip netns exec server ip l set ul-server up
 ----
 
-wen wir das haben legen wir noch einen zweiten Namespace für den Client (BananaPi2) an:
+Jetzt legen wir noch einen zweiten Namespace für den Client (BananaPi2) an:
 ----
 ip netns add client
 ip link add ul-client link lan4 type macvlan mode bridge
 ip link set dev ul-client netns client
 ip netns exec client ip l set ul-client up
+----
+
+Wenn beide Namespaces eingerichtet sind, weisen wir den Interfaces ul-server und ul-client noch IP-Adressen zu.
+----
+ip netns exec server ip a add 10.10.2.1/24 dev ul-server
+ip netns exec client ip a add 10.10.1.1/24 dev ul-client
+----
+
+zusätlich zu den IP-Adressen müssen noch Routen für die Umleitung des Datenverkehrs für die Namespaces eingerichtet werden. Dies machen wir über folgende Befehle:
+----
+ip netns exec client ip r add 10.10.2.0/24 via 10.10.1.2
+ip netns exec server ip r add 10.10.1.0/24 via 10.10.2.2
 ----
 
 === Attenuator
