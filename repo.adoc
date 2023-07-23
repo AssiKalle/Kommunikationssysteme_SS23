@@ -148,7 +148,7 @@ ip netns exec server ip a add 10.10.2.1/24 dev ul-server
 ip netns exec client ip a add 10.10.1.1/24 dev ul-client
 ----
 
-zusätlich zu den IP-Adressen müssen noch Routen für die Umleitung des Datenverkehrs für die Namespaces eingerichtet werden. Dies machen wir über folgende Befehle:
+zusätlich zu den IP-Adressen müssen auch noch Routen für die Umleitung des Datenverkehrs für die Namespaces eingerichtet werden. Dies machen wir über folgende Befehle:
 ----
 ip netns exec client ip r add 10.10.2.0/24 via 10.10.1.2
 ip netns exec server ip r add 10.10.1.0/24 via 10.10.2.2
