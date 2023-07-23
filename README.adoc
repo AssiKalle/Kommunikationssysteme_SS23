@@ -1,5 +1,7 @@
 = README
 
+https://assikalle.github.io/Kommunikationssysteme_SS23/
+
 include::repo.adoc[]
 
 # scnx shielding box
