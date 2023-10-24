@@ -129,7 +129,7 @@ Da wir den Wlan-Verkehr zwischen den beiden BananaPi's mit verschiedenen Dämpfu
 Als erstes legen wir den Namespaces für den Server (BananaPi1) fest:
 ----
 ip netns add server
-ip link add ul-server link lan2 type macvlan mode bridge
+ip link add ul-server link lan4 type macvlan mode bridge
 ip link set dev ul-server netns server
 ip netns exec server ip l set ul-server up
 ----
@@ -137,21 +137,29 @@ ip netns exec server ip l set ul-server up
 Jetzt legen wir noch einen zweiten Namespace für den Client (BananaPi2) an:
 ----
 ip netns add client
-ip link add ul-client link lan4 type macvlan mode bridge
+ip link add ul-client link lan2 type macvlan mode bridge
 ip link set dev ul-client netns client
 ip netns exec client ip l set ul-client up
 ----
 
 Wenn beide Namespaces eingerichtet sind, weisen wir den Interfaces ul-server und ul-client noch IP-Adressen zu.
 ----
-ip netns exec server ip a add 10.10.2.1/24 dev ul-server
-ip netns exec client ip a add 10.10.1.1/24 dev ul-client
+ip netns exec server ip a add 10.10.1.3/24 dev ul-server
+ip netns exec client ip a add 10.10.2.3/24 dev ul-client 
 ----
 
 zusätlich zu den IP-Adressen müssen auch noch Routen für die Umleitung des Datenverkehrs für die Namespaces eingerichtet werden. Dies machen wir über folgende Befehle:
 ----
-ip netns exec client ip r add 10.10.2.0/24 via 10.10.1.2
-ip netns exec server ip r add 10.10.1.0/24 via 10.10.2.2
+ip netns exec server ip r add 10.10.2.0/24 via 10.10.1.2
+ip netns exec client ip r add 10.10.1.0/24 via 10.10.2.2
+----
+
+Um das ganze zu testen und sicher zu gehen das die Einrichtung fehlerfrei ist verwenden wir iPerf3.
+Wir starten 2 Kommandozeilen und verbinden uns mit beiden auf dem Controller.
+In einem der beiden Fenster starten wir einen iPerf3 Server und in dem anderen den Client.
+----
+ip netns exec server iperf3 -s
+ip netns exec client iperf3 -c 10.10.1.3 -t 20
 ----
 
 === Attenuator
