@@ -18,14 +18,14 @@ Die einzelnen Banana Pi's haben folgende IP-Adressen:
 |Controller
 |10.10.10.2
 
-|BannanPi1
+|BananaPi1
 |10.10.2.2
 
-|BannanPi2
+|BananaPi2
 |10.10.1.2
 |=== 
 
-=== BannanPi1 (Access Point): +
+=== BananaPi1 (Access Point): +
 ==== Schritt 1:
 Bearbeiten der Konfigurationsdatei: _/etc/config/wireless_ +
 unter _config wifi-device 'radio0'_ folgende Parameter ändern: 
@@ -65,7 +65,7 @@ config route 'use_wifi'
         option gateway '10.100.10.2'
 ----
 
-=== BannanPi2 (Station): +
+=== BananaPi2 (Station): +
 ==== Schritt 1:
 Bearbeiten der Konfigurationsdatei: _/etc/config/wireless_ +
 unter _config wifi-device 'radio0'_ folgende Parameter ändern: 
@@ -109,17 +109,21 @@ config route 'use_wifi'
 Um die Verbindung mit iPerf3, mit hilfe von Namespaces, messen zu können müssen wir zunächst 2 Netzwerk-Interfaces anlegen. Diese sind nur für die Strecke zwischen dem Controller und dem Pi1 bzw. Pi2 zuständig. +
 Die beiden Interfaces legen wir in der _etc/config/network_ des Controllers an:
 ----
-config interface 'Pi1'
-        option device 'lan2'
+config interface 'pi1'
+        option device 'eth1'
         option proto 'static'
-        option ipaddr '10.10.2.1'
-        option netmask '255.255.255.0'
+        option ipaddr '10.10.2.1/24'
 
-config interface 'Pi2'
-        option device 'lan4'
+config interface 'pi2'
+        option device 'eth0'
         option proto 'static'
-        option ipaddr '10.10.1.1'
-        option netmask '255.255.255.0'
+        option ipaddr '10.10.1.1/24'
+
+config interface 'attenuator'
+        option device 'eth3'
+        option proto 'static'
+        option ipaddr '172.20.10.1/24'
+
 ----
 
 === Namespaces 
@@ -129,7 +133,7 @@ Da wir den Wlan-Verkehr zwischen den beiden BananaPi's mit verschiedenen Dämpfu
 Als erstes legen wir den Namespaces für den Server (BananaPi1) fest:
 ----
 ip netns add server
-ip link add ul-server link lan4 type macvlan mode bridge
+ip link add ul-server link eth0 type macvlan mode bridge
 ip link set dev ul-server netns server
 ip netns exec server ip l set ul-server up
 ----
@@ -137,7 +141,7 @@ ip netns exec server ip l set ul-server up
 Jetzt legen wir noch einen zweiten Namespace für den Client (BananaPi2) an:
 ----
 ip netns add client
-ip link add ul-client link lan2 type macvlan mode bridge
+ip link add ul-client link eth1 type macvlan mode bridge
 ip link set dev ul-client netns client
 ip netns exec client ip l set ul-client up
 ----
@@ -164,6 +168,21 @@ ip netns exec client iperf3 -c 10.10.1.3 -t 20
 
 === Attenuator
 Der Attenuator fungiert als Kontrollmechanismus, um gezielt den WLAN-Verkehr zu beeinflussen und verschiedene Szenarien zu simulieren. Durch die systematische Anpassung der Dämpfungseinstellungen können verschiedene Verbindungsszenarien getestet werden, um die Auswirkungen auf die Übertragungsgeschwindigkeit zu analysieren.
+Um die Experimente auf dem Attenuator laufen zu lassen, haben wir ein https://github.com/thuehn/attenuator_script_python[Script] welches von Philipp Buechler geschrieben wurde verwendet. 
+Im Script haben wir ein paar kleine Änderungen vorgenommen, sodass der Attenuator über Ethernet ansprechbar ist: 
+----
+def open_socket():
+    try:
+        global client_socket
+        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        client_socket.connect(('172.20.10.10', 23))
+        print('create socket')
+        return True
+    except ConnectionError:
+        print("Could not connect to the Attenuator. Check the IP address and port.")
+        return False
+----
+
 
 
 [[verwendung]]
