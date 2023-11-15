@@ -476,17 +476,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top"><p class="tableblock">10.10.10.2</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BannanPi1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BananaPi1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">10.10.2.2</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BannanPi2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BananaPi2</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">10.10.1.2</p></td>
 </tr>
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="_bannanpi1_access_point">BannanPi1 (Access Point):<br></h3>
+<h3 id="_bananapi1_access_point">BananaPi1 (Access Point):<br></h3>
 <div class="sect3">
 <h4 id="_schritt_1">Schritt 1:</h4>
 <div class="paragraph">
@@ -580,7 +580,7 @@ hier legen ein neues Interface an:<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_bannanpi2_station">BannanPi2 (Station):<br></h3>
+<h3 id="_bananapi2_station">BananaPi2 (Station):<br></h3>
 <div class="sect3">
 <h4 id="_schritt_1_2">Schritt 1:</h4>
 <div class="paragraph">
@@ -681,17 +681,20 @@ Die beiden Interfaces legen wir in der <em>etc/config/network</em> des Controlle
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>config interface 'Pi1'
-        option device 'lan2'
+<pre>config interface 'pi1'
+        option device 'eth1'
         option proto 'static'
-        option ipaddr '10.10.2.1'
-        option netmask '255.255.255.0'
+        option ipaddr '10.10.2.1/24'
 
-config interface 'Pi2'
-        option device 'lan4'
+config interface 'pi2'
+        option device 'eth0'
         option proto 'static'
-        option ipaddr '10.10.1.1'
-        option netmask '255.255.255.0'</pre>
+        option ipaddr '10.10.1.1/24'
+
+config interface 'attenuator'
+        option device 'eth3'
+        option proto 'static'
+        option ipaddr '172.20.10.1/24'</pre>
 </div>
 </div>
 </div>
@@ -708,7 +711,7 @@ config interface 'Pi2'
 <div class="listingblock">
 <div class="content">
 <pre>ip netns add server
-ip link add ul-server link lan4 type macvlan mode bridge
+ip link add ul-server link eth0 type macvlan mode bridge
 ip link set dev ul-server netns server
 ip netns exec server ip l set ul-server up</pre>
 </div>
@@ -719,7 +722,7 @@ ip netns exec server ip l set ul-server up</pre>
 <div class="listingblock">
 <div class="content">
 <pre>ip netns add client
-ip link add ul-client link lan2 type macvlan mode bridge
+ip link add ul-client link eth1 type macvlan mode bridge
 ip link set dev ul-client netns client
 ip netns exec client ip l set ul-client up</pre>
 </div>
@@ -758,7 +761,23 @@ ip netns exec client iperf3 -c 10.10.1.3 -t 20</pre>
 <div class="sect2">
 <h3 id="_attenuator">Attenuator</h3>
 <div class="paragraph">
-<p>Der Attenuator fungiert als Kontrollmechanismus, um gezielt den WLAN-Verkehr zu beeinflussen und verschiedene Szenarien zu simulieren. Durch die systematische Anpassung der Dämpfungseinstellungen können verschiedene Verbindungsszenarien getestet werden, um die Auswirkungen auf die Übertragungsgeschwindigkeit zu analysieren.</p>
+<p>Der Attenuator fungiert als Kontrollmechanismus, um gezielt den WLAN-Verkehr zu beeinflussen und verschiedene Szenarien zu simulieren. Durch die systematische Anpassung der Dämpfungseinstellungen können verschiedene Verbindungsszenarien getestet werden, um die Auswirkungen auf die Übertragungsgeschwindigkeit zu analysieren.
+Um die Experimente auf dem Attenuator laufen zu lassen, haben wir ein <a href="https://github.com/thuehn/attenuator_script_python">Script</a> welches von Philipp Buechler geschrieben wurde verwendet.
+Im Script haben wir ein paar kleine Änderungen vorgenommen, sodass der Attenuator über Ethernet ansprechbar ist:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>def open_socket():
+    try:
+        global client_socket
+        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        client_socket.connect(('172.20.10.10', 23))
+        print('create socket')
+        return True
+    except ConnectionError:
+        print("Could not connect to the Attenuator. Check the IP address and port.")
+        return False</pre>
+</div>
 </div>
 </div>
 </div>
@@ -777,7 +796,7 @@ ip netns exec client iperf3 -c 10.10.1.3 -t 20</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-10-24 09:42:04 UTC
+Last updated 2023-11-15 13:41:04 UTC
 </div>
 </div>
 </body>
