@@ -12,6 +12,9 @@ jobs:
     
     steps:
     - name: Checkout repository
+      uses: actions/checkout@v2 # Hier wurde die korrekte Action verwendet
+
+    - name: Set up Node.js environment
       uses: actions/setup-node@v2
       with:
         node-version: '16'
@@ -38,4 +41,4 @@ jobs:
         git config --local user.name "AssiKalle"
         git add index.html
         git commit -m "Convert AsciiDoc to HTML"
-        git push
+        git push 
