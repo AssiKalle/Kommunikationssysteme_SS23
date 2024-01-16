@@ -1,4 +1,9 @@
 = README
+Die einzelnen Schritte zum Projektablauf können mit Hilfe des Befehls ausgegeben werden
+
+----
+sh readme.sh 
+----
 
 https://assikalle.github.io/Kommunikationssysteme_SS23/
 
