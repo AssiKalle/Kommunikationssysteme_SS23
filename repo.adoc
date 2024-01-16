@@ -213,22 +213,22 @@ Bei dem Versuch für den Solotest befinden sich die Testergebnisse im Verzeichni
 
 '''
 === Aufbereiten der Daten 
-Um den Median und den Mittelwert zu bestimmen müssen die Daten noch aufbereitet werden. Dies wird über folgenden Befehl möglich gemacht.
+Um den Median und den Mittelwert zu bestimmen müssen die Daten noch aufbereitet werden. Dies wird über folgenden https://github.com/AssiKalle/Kommunikationssysteme_SS23/blob/main/calc_median_mittelwert.sh[Befehl] möglich gemacht.
 ----
 sh calc_median_mittelwert.sh
 ----
 Nachdem dieses Script vollständig durchgelaufen ist befinden sich die Ergbnisse des Medians und Mittelwerts im Verzeichnis _etc/mnt/experiments/oli_valerius/mittelwert_median/_
 
 === Visualisierung der Testergebnisse 
-Nachdem die Testergebnisse nun fertig aufbereitet sind, können diese als Plots dargestellt werden. Mithilfe des folgenden Befehls lassen sich die Plots für die jeweiligen Test erzeugen.
+Nachdem die Testergebnisse nun fertig aufbereitet sind, können diese als Plots dargestellt werden. Mithilfe des folgenden https://github.com/AssiKalle/Kommunikationssysteme_SS23/blob/main/plotten.sh[Befehls] lassen sich die Plots für die jeweiligen Test erzeugen.
 ----
 sh plotten.sh
 (1) - Mittelwert
 (2) - Median
 (3) - Solotest
 ----
-Die Plots von Mittelwert und Median befinden sich in dem Verzeichnis _etc/mnt/experiments/oli_valerius/mittelwert_median/_ . +
-Der Plot für den Solotest ist in folgendem Verzeichnis zu finden _etc/mnt/experiments/oli_valerius/solotest/_ .
+Die Plots von https://github.com/AssiKalle/Kommunikationssysteme_SS23/blob/main/mittelwert.png[Mittelwert] und https://github.com/AssiKalle/Kommunikationssysteme_SS23/blob/main/median.png[Median] befinden sich in dem Verzeichnis _etc/mnt/experiments/oli_valerius/mittelwert_median/_ . +
+Der Plot für den https://github.com/AssiKalle/Kommunikationssysteme_SS23/blob/main/solotest.png[Solotest] ist in folgendem Verzeichnis zu finden _etc/mnt/experiments/oli_valerius/solotest/_ .
 
 '''
 
