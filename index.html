@@ -444,6 +444,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>Das vorliegende Experiment befasst sich mit der Untersuchung der optimalen WLAN-Verbindung zwischen zwei BananaPi-Routern, die jeweils in einer Shielding Box platziert sind. Die beiden Router sind über einen gemeinsamen BananaPi-Controller verbunden, der wiederum über USB mit einem Attenuator, der als Dämpfungsglied fungiert, verbunden ist. Das Ziel des Experiments besteht darin, herauszufinden, welche Dämpfungen mit welchen Stärken und Mustern die schnellste Verbindung zwischen den beiden BananaPi-Routern ermöglichen. Durch die Variation der Dämpfungen sollen optimale Einstellungen ermittelt werden, um eine effiziente und zuverlässige WLAN-Kommunikation zwischen den beiden Geräten zu gewährleisten.</p>
 </div>
+<hr>
 </div>
 </div>
 <div class="sect1">
@@ -697,6 +698,7 @@ config interface 'attenuator'
         option ipaddr '172.20.10.1/24'</pre>
 </div>
 </div>
+<hr>
 </div>
 <div class="sect2">
 <h3 id="_namespaces">Namespaces</h3>
@@ -756,6 +758,7 @@ In einem der beiden Fenster starten wir einen iPerf3 Server und in dem anderen d
 ip netns exec client iperf3 -c 10.10.1.3 -t 20</pre>
 </div>
 </div>
+<hr>
 </div>
 </div>
 <div class="sect2">
@@ -779,6 +782,82 @@ Im Script haben wir ein paar kleine Änderungen vorgenommen, sodass der Attenuat
         return False</pre>
 </div>
 </div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="_versuchsvorbereitung">Versuchsvorbereitung</h3>
+<div class="paragraph">
+<p>Bevor der Versuch gestartet werden kann muss die Zeit und die Dämpfung für jeden Chain in der tables.csv hinterlegt werden.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>- Zeit;Dämpfung;Dämpfung;Dämpfung;Dämpfung
+- am Ende "STOP" schreiben
+Beispiel:
+1000;30;30;30;30
+STOP</pre>
+</div>
+</div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="_versuch_starten">Versuch starten</h3>
+<div class="paragraph">
+<p>Mit folgendem Befehl lässt sich der Versuch starten, das <a href="https://github.com/AssiKalle/Kommunikationssysteme_SS23/blob/main/start_test.sh">Script</a> befindet sich im Verzeichniss <em>etc/mnt/experiments/oli_valerius/</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>sh start_test.sh</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>sobald das Script gestartet ist, hat man die Möglichkeit zwischen Median/Mittelwert und Solotest zu wählen.
+Dabei wird die Gesamtzeit des Versuchs aus der <a href="https://github.com/AssiKalle/Kommunikationssysteme_SS23/blob/main/tables.csv">tables.csv</a> berechnet. Die Zeit ist relevant für die Länge des Versuchs. Im Anschluss wird der iPerf3 Server, parallel dazu wird das Attenuator-Script gestartet und dazu verbindet sich der iPerf3 Client.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>(1) - Mittelwert/Median
+(2) - Solotest</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Hat man den Versuch für Median/Mittelwert durchgeführt, befinden sich die iPerf_resulte <em>etc/mnt/experiments/oli_valerius/mittelwert_median/data/</em> .
+Bei dem Versuch für den Solotest befinden sich die Testergebnisse im Verzeichnis <em>etc/mnt/experiments/oli_valerius/solotest/</em> .</p>
+</div>
+<hr>
+</div>
+<div class="sect2">
+<h3 id="_aufbereiten_der_daten">Aufbereiten der Daten</h3>
+<div class="paragraph">
+<p>Um den Median und den Mittelwert zu bestimmen müssen die Daten noch aufbereitet werden. Dies wird über folgenden Befehl möglich gemacht.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>sh calc_median_mittelwert.sh</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Nachdem dieses Script vollständig durchgelaufen ist befinden sich die Ergbnisse des Medians und Mittelwerts im Verzeichnis <em>etc/mnt/experiments/oli_valerius/mittelwert_median/</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_visualisierung_der_testergebnisse">Visualisierung der Testergebnisse</h3>
+<div class="paragraph">
+<p>Nachdem die Testergebnisse nun fertig aufbereitet sind, können diese als Plots dargestellt werden. Mithilfe des folgenden Befehls lassen sich die Plots für die jeweiligen Test erzeugen.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>sh plotten.sh
+(1) - Mittelwert
+(2) - Median
+(3) - Solotest</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Plots von Mittelwert und Median befinden sich in dem Verzeichnis <em>etc/mnt/experiments/oli_valerius/mittelwert_median/</em> .<br>
+Der Plot für den Solotest ist in folgendem Verzeichnis zu finden <em>etc/mnt/experiments/oli_valerius/solotest/</em> .</p>
+</div>
+<hr>
 </div>
 </div>
 </div>
@@ -796,7 +875,7 @@ Im Script haben wir ein paar kleine Änderungen vorgenommen, sodass der Attenuat
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-15 13:41:04 UTC
+Last updated 2024-01-16 14:37:07 UTC
 </div>
 </div>
 </body>
