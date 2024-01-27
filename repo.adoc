@@ -6,6 +6,14 @@ Das vorliegende Experiment befasst sich mit der Untersuchung der optimalen WLAN-
 
 '''
 
+== Verwendung
+Das Ziel dieses Experiments besteht darin, die optimalen Dämpfungseinstellungen zu ermitteln, um die schnellstmögliche Verbindung zwischen den beiden BananaPi-Routern herzustellen. Dabei werden verschiedene Dämpfungen mit unterschiedlichen Stärken und Mustern getestet, um herauszufinden, welche Konfiguration die effizienteste und zuverlässigste WLAN-Kommunikation zwischen den Geräten ermöglicht. Durch die Variation der Dämpfungen werden die optimalen Einstellungen ermittelt, um eine optimale Übertragungsgeschwindigkeit und eine stabile Verbindung zwischen den BananaPi-Routern zu erreichen. Das Experiment trägt dazu bei, die WLAN-Performance zu maximieren und die bestmögliche Netzwerkleistung in diesem spezifischen Szenario zu erzielen.
+
+Das Experiment bietet die Möglichkeit, wertvolle Erkenntnisse über die optimale Konfiguration der Dämpfungen zu gewinnen und eine Grundlage für die Optimierung der WLAN-Verbindung zwischen den beiden BananaPi-Routern in einer Shielding Box zu schaffen. Die Ergebnisse können zur Verbesserung der Netzwerkleistung und Stabilität in ähnlichen Umgebungen beitragen.
+
+'''
+
+
 [[aufbau]]
 == Aufbau
 Hier sehen sie den groben Aufbau des Projekts
@@ -232,8 +240,24 @@ Der Plot für den https://github.com/AssiKalle/Kommunikationssysteme_SS23/blob/m
 
 '''
 
-[[verwendung]]
-== Verwendung
-Das Ziel dieses Experiments besteht darin, die optimalen Dämpfungseinstellungen zu ermitteln, um die schnellstmögliche Verbindung zwischen den beiden BananaPi-Routern herzustellen. Dabei werden verschiedene Dämpfungen mit unterschiedlichen Stärken und Mustern getestet, um herauszufinden, welche Konfiguration die effizienteste und zuverlässigste WLAN-Kommunikation zwischen den Geräten ermöglicht. Durch die Variation der Dämpfungen werden die optimalen Einstellungen ermittelt, um eine optimale Übertragungsgeschwindigkeit und eine stabile Verbindung zwischen den BananaPi-Routern zu erreichen. Das Experiment trägt dazu bei, die WLAN-Performance zu maximieren und die bestmögliche Netzwerkleistung in diesem spezifischen Szenario zu erzielen.
+== Auswertung
+=== Solotest
+Ein Solotest ist ein Test, bei welchem über einen bestimmten Zeitraum nur ein definierter Dämpfungswert via IPerf aktiv getestet
+wird.
+Die geplotteten Bilder sind mit dem Datendurchsatz auf der Y-Achse, sowie die Zeit auf der X-Achse beschrieben.
 
-Das Experiment bietet die Möglichkeit, wertvolle Erkenntnisse über die optimale Konfiguration der Dämpfungen zu gewinnen und eine Grundlage für die Optimierung der WLAN-Verbindung zwischen den beiden BananaPi-Routern in einer Shielding Box zu schaffen. Die Ergebnisse können zur Verbesserung der Netzwerkleistung und Stabilität in ähnlichen Umgebungen beitragen.
+=== Mittelwert/Median
+Mittelwert und auch Median werden mit Hilfe mehrerer Solo-Testdaten berechnet und anschließend geplottet.
+Wobei sich hier die Achsen im Plot zu dem des Solotests unterschieden.
+Die X-Achse wird nun mit der Dämpfung in DB beschrieben.
+Die Y-Achse ist weiterhin identisch und zeigt den Datendurchsatz.
+
+=== Wieso wurden diese Dämpfungswerte gewählt?
+Diese Dämpfungswerte wurden gewählt, da ab einer Frequenz von 35DB der Datendurchsatz sich erst anfängt zu ändern, dieser nimmt nun ab.
+Ab einer Frequenz von knapp 75DB schafft der iPerf-Client es nicht mehr sich mit dem iPerf-Server zu verbinden,
+beziehungsweise ist der Durchsatz bei 0.
+
+=== Ergebnis der Auswertung:
+Insgesamt liefern diese Tests wichtige Einblicke in die Leistungsfähigkeit und Zuverlässigkeit von Netzwerken unter verschiedenen Bedingungen und tragen dazu bei, die Netzwerkqualität zu optimieren.
+Ab einer Dämpfung von ungefähr 75DB ist die Verbindung so stark eingeschränkt, dass es unter anderem nicht mehr möglich ist sich mit dem Netzwerk zu verbinden und es zu Paketverlust kommt, sollte trotzdem eine Verbindung möglich sein liegt der Datendurchsatz bei 0. Somit kann man sehen, dass verschiedene Geräte die Störsignale im hohen dB-Bereich aussenden sich sehr negativ auf die Qualität des Netzwerkes auswirken.  
+
