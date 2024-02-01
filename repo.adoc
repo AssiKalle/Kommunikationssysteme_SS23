@@ -4,7 +4,6 @@
 == Einleitung
 Das vorliegende Experiment befasst sich mit der Untersuchung der optimalen WLAN-Verbindung zwischen zwei BananaPi-Routern, die jeweils in einer Shielding Box platziert sind. Die beiden Router sind über einen gemeinsamen BananaPi-Controller verbunden, der wiederum über USB mit einem Attenuator, der als Dämpfungsglied fungiert, verbunden ist. Das Ziel des Experiments besteht darin, herauszufinden, welche Dämpfungen mit welchen Stärken und Mustern die schnellste Verbindung zwischen den beiden BananaPi-Routern ermöglichen. Durch die Variation der Dämpfungen sollen optimale Einstellungen ermittelt werden, um eine effiziente und zuverlässige WLAN-Kommunikation zwischen den beiden Geräten zu gewährleisten.
 
-'''
 
 == Experimentaufbau und Methoden:
 Hier sehen sie den groben Aufbau des Projekts
@@ -126,7 +125,7 @@ config interface 'attenuator'
         option ipaddr '172.20.10.1/24'
 
 ----
-'''
+
 === Namespaces 
 Da wir den Wlan-Verkehr zwischen den beiden BananaPi's mit verschiedenen Dämpfungswerten messen möchten, führen wir die Messungen in sogenannten Namespaces aus da der Controller somit sowohl als iPerf3 Server als auch als Client verwendet werden kann. Da wir später noch die Dämpfungen über den mit dem Controller ansteuerbaren Attenuator ändern wollen, ist dies eine gute Möglichkeit. 
 
@@ -166,7 +165,7 @@ In einem der beiden Fenster starten wir einen iPerf3 Server und in dem anderen d
 ip netns exec server iperf3 -s
 ip netns exec client iperf3 -c 10.10.1.3 -t 20
 ----
-'''
+
 === Attenuator
 Der Attenuator fungiert als Kontrollmechanismus, um gezielt den WLAN-Verkehr zu beeinflussen und verschiedene Szenarien zu simulieren. Durch die systematische Anpassung der Dämpfungseinstellungen können verschiedene Verbindungsszenarien getestet werden, um die Auswirkungen auf die Übertragungsgeschwindigkeit zu analysieren.
 Um die Experimente auf dem Attenuator laufen zu lassen, haben wir ein https://github.com/thuehn/attenuator_script_python[Script] welches von Philipp Buechler geschrieben wurde verwendet. 
@@ -183,7 +182,7 @@ def open_socket():
         print("Could not connect to the Attenuator. Check the IP address and port.")
         return False
 ----
-'''
+
 === Versuchsvorbereitung
 Bevor der Versuch gestartet werden kann muss die Zeit und die Dämpfung für jeden Chain in der tables.csv hinterlegt werden.
 ----
@@ -194,7 +193,6 @@ Beispiel:
 STOP
 ----
 
-'''
 
 == Durchführung
 
@@ -212,7 +210,7 @@ Dabei wird die Gesamtzeit des Versuchs aus der https://github.com/AssiKalle/Komm
 Hat man den Versuch für Median/Mittelwert durchgeführt, befinden sich die iPerf_resulte _etc/mnt/experiments/oli_valerius/mittelwert_median/data/_ .
 Bei dem Versuch für den Solotest befinden sich die Testergebnisse im Verzeichnis _etc/mnt/experiments/oli_valerius/solotest/_ .
 
-'''
+
 === Aufbereiten der Daten 
 Um den Median und den Mittelwert zu bestimmen müssen die Daten noch aufbereitet werden. Dies wird über folgenden https://github.com/AssiKalle/Kommunikationssysteme_SS23/blob/main/calc_median_mittelwert.sh[Befehl] möglich gemacht.
 ----
@@ -230,8 +228,6 @@ sh plotten.sh
 ----
 Die Plots von https://github.com/AssiKalle/Kommunikationssysteme_SS23/blob/main/mittelwert.png[Mittelwert] und https://github.com/AssiKalle/Kommunikationssysteme_SS23/blob/main/median.png[Median] befinden sich in dem Verzeichnis _etc/mnt/experiments/oli_valerius/mittelwert_median/_ . +
 Der Plot für den https://github.com/AssiKalle/Kommunikationssysteme_SS23/blob/main/solotest.png[Solotest] ist in folgendem Verzeichnis zu finden _etc/mnt/experiments/oli_valerius/solotest/_ .
-
-'''
 
 
 == Ergebnisse:
