@@ -444,7 +444,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>Das vorliegende Experiment befasst sich mit der Untersuchung der optimalen WLAN-Verbindung zwischen zwei BananaPi-Routern, die jeweils in einer Shielding Box platziert sind. Die beiden Router sind über einen gemeinsamen BananaPi-Controller verbunden, der wiederum über USB mit einem Attenuator, der als Dämpfungsglied fungiert, verbunden ist. Das Ziel des Experiments besteht darin, herauszufinden, welche Dämpfungen mit welchen Stärken und Mustern die schnellste Verbindung zwischen den beiden BananaPi-Routern ermöglichen. Durch die Variation der Dämpfungen sollen optimale Einstellungen ermittelt werden, um eine effiziente und zuverlässige WLAN-Kommunikation zwischen den beiden Geräten zu gewährleisten.</p>
 </div>
-<hr>
 </div>
 </div>
 <div class="sect1">
@@ -698,7 +697,6 @@ config interface 'attenuator'
         option ipaddr '172.20.10.1/24'</pre>
 </div>
 </div>
-<hr>
 </div>
 <div class="sect2">
 <h3 id="_namespaces">Namespaces</h3>
@@ -758,7 +756,6 @@ In einem der beiden Fenster starten wir einen iPerf3 Server und in dem anderen d
 ip netns exec client iperf3 -c 10.10.1.3 -t 20</pre>
 </div>
 </div>
-<hr>
 </div>
 </div>
 <div class="sect2">
@@ -782,7 +779,6 @@ Im Script haben wir ein paar kleine Änderungen vorgenommen, sodass der Attenuat
         return False</pre>
 </div>
 </div>
-<hr>
 </div>
 <div class="sect2">
 <h3 id="_versuchsvorbereitung">Versuchsvorbereitung</h3>
@@ -798,7 +794,6 @@ Beispiel:
 STOP</pre>
 </div>
 </div>
-<hr>
 </div>
 </div>
 </div>
@@ -829,7 +824,6 @@ Dabei wird die Gesamtzeit des Versuchs aus der <a href="https://github.com/AssiK
 <p>Hat man den Versuch für Median/Mittelwert durchgeführt, befinden sich die iPerf_resulte <em>etc/mnt/experiments/oli_valerius/mittelwert_median/data/</em> .
 Bei dem Versuch für den Solotest befinden sich die Testergebnisse im Verzeichnis <em>etc/mnt/experiments/oli_valerius/solotest/</em> .</p>
 </div>
-<hr>
 </div>
 <div class="sect2">
 <h3 id="_aufbereiten_der_daten">Aufbereiten der Daten</h3>
@@ -862,7 +856,6 @@ Bei dem Versuch für den Solotest befinden sich die Testergebnisse im Verzeichni
 <p>Die Plots von <a href="https://github.com/AssiKalle/Kommunikationssysteme_SS23/blob/main/mittelwert.png">Mittelwert</a> und <a href="https://github.com/AssiKalle/Kommunikationssysteme_SS23/blob/main/median.png">Median</a> befinden sich in dem Verzeichnis <em>etc/mnt/experiments/oli_valerius/mittelwert_median/</em> .<br>
 Der Plot für den <a href="https://github.com/AssiKalle/Kommunikationssysteme_SS23/blob/main/solotest.png">Solotest</a> ist in folgendem Verzeichnis zu finden <em>etc/mnt/experiments/oli_valerius/solotest/</em> .</p>
 </div>
-<hr>
 </div>
 </div>
 </div>
@@ -972,7 +965,7 @@ Ebenso sind mögliche Fehlfunktionen des Attenuators und somit Schwankungen der 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-02-01 13:48:04 UTC
+Last updated 2024-02-01 13:50:14 UTC
 </div>
 </div>
 </body>
