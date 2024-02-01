@@ -1,21 +1,12 @@
 = Inhaltsverzeichnis
 
-[[einleitung]]
+
 == Einleitung
 Das vorliegende Experiment befasst sich mit der Untersuchung der optimalen WLAN-Verbindung zwischen zwei BananaPi-Routern, die jeweils in einer Shielding Box platziert sind. Die beiden Router sind über einen gemeinsamen BananaPi-Controller verbunden, der wiederum über USB mit einem Attenuator, der als Dämpfungsglied fungiert, verbunden ist. Das Ziel des Experiments besteht darin, herauszufinden, welche Dämpfungen mit welchen Stärken und Mustern die schnellste Verbindung zwischen den beiden BananaPi-Routern ermöglichen. Durch die Variation der Dämpfungen sollen optimale Einstellungen ermittelt werden, um eine effiziente und zuverlässige WLAN-Kommunikation zwischen den beiden Geräten zu gewährleisten.
 
 '''
 
-== Verwendung
-Das Ziel dieses Experiments besteht darin, die optimalen Dämpfungseinstellungen zu ermitteln, um die schnellstmögliche Verbindung zwischen den beiden BananaPi-Routern herzustellen. Dabei werden verschiedene Dämpfungen mit unterschiedlichen Stärken und Mustern getestet, um herauszufinden, welche Konfiguration die effizienteste und zuverlässigste WLAN-Kommunikation zwischen den Geräten ermöglicht. Durch die Variation der Dämpfungen werden die optimalen Einstellungen ermittelt, um eine optimale Übertragungsgeschwindigkeit und eine stabile Verbindung zwischen den BananaPi-Routern zu erreichen. Das Experiment trägt dazu bei, die WLAN-Performance zu maximieren und die bestmögliche Netzwerkleistung in diesem spezifischen Szenario zu erzielen.
-
-Das Experiment bietet die Möglichkeit, wertvolle Erkenntnisse über die optimale Konfiguration der Dämpfungen zu gewinnen und eine Grundlage für die Optimierung der WLAN-Verbindung zwischen den beiden BananaPi-Routern in einer Shielding Box zu schaffen. Die Ergebnisse können zur Verbesserung der Netzwerkleistung und Stabilität in ähnlichen Umgebungen beitragen.
-
-'''
-
-
-[[aufbau]]
-== Aufbau
+== Experimentaufbau und Methoden:
 Hier sehen sie den groben Aufbau des Projekts
 
 image::Aufbau_Projekt.PNG[]
@@ -205,6 +196,8 @@ STOP
 
 '''
 
+== Durchführung
+
 === Versuch starten
 Mit folgendem Befehl lässt sich der Versuch starten, das https://github.com/AssiKalle/Kommunikationssysteme_SS23/blob/main/start_test.sh[Script] befindet sich im Verzeichniss _etc/mnt/experiments/oli_valerius/_
 ----
@@ -240,24 +233,62 @@ Der Plot für den https://github.com/AssiKalle/Kommunikationssysteme_SS23/blob/m
 
 '''
 
-== Auswertung
+
+== Ergebnisse:
 === Solotest
 Ein Solotest ist ein Test, bei welchem über einen bestimmten Zeitraum nur ein definierter Dämpfungswert via IPerf aktiv getestet
 wird.
 Die geplotteten Bilder sind mit dem Datendurchsatz auf der Y-Achse, sowie die Zeit auf der X-Achse beschrieben.
+Für jeden Solotest muss die Dämpfung seperat in der _tables.csv_ festgelegt werden. In dem Unten gezeigten Beispiel wurde eine Dämpfung von 35dB festgelegt. 
+
+Solotest:
+
+image::solotest.png[]
+
 
 === Mittelwert/Median
 Mittelwert und auch Median werden mit Hilfe mehrerer Solo-Testdaten berechnet und anschließend geplottet.
 Wobei sich hier die Achsen im Plot zu dem des Solotests unterschieden.
-Die X-Achse wird nun mit der Dämpfung in DB beschrieben.
+Die X-Achse wird nun mit der Dämpfung in dB beschrieben.
 Die Y-Achse ist weiterhin identisch und zeigt den Datendurchsatz.
 
+Mittelwert:
+
+image::mittelwert.png[]
+
+Median:
+
+image::median.png[]
+
 === Wieso wurden diese Dämpfungswerte gewählt?
-Diese Dämpfungswerte wurden gewählt, da ab einer Frequenz von 35DB der Datendurchsatz sich erst anfängt zu ändern, dieser nimmt nun ab.
-Ab einer Frequenz von knapp 75DB schafft der iPerf-Client es nicht mehr sich mit dem iPerf-Server zu verbinden,
+Diese Dämpfungswerte wurden gewählt, da ab einer Frequenz von 35dB der Datendurchsatz sich erst anfängt zu ändern, dieser nimmt nun ab.
+Ab einer Frequenz von knapp 75dB schafft der iPerf-Client es nicht mehr sich mit dem iPerf-Server zu verbinden,
 beziehungsweise ist der Durchsatz bei 0.
 
-=== Ergebnis der Auswertung:
+=== Ergebnisse:
 Insgesamt liefern diese Tests wichtige Einblicke in die Leistungsfähigkeit und Zuverlässigkeit von Netzwerken unter verschiedenen Bedingungen und tragen dazu bei, die Netzwerkqualität zu optimieren.
-Ab einer Dämpfung von ungefähr 75DB ist die Verbindung so stark eingeschränkt, dass es unter anderem nicht mehr möglich ist sich mit dem Netzwerk zu verbinden und es zu Paketverlust kommt, sollte trotzdem eine Verbindung möglich sein liegt der Datendurchsatz bei 0. Somit kann man sehen, dass verschiedene Geräte die Störsignale im hohen dB-Bereich aussenden sich sehr negativ auf die Qualität des Netzwerkes auswirken.  
+Ab einer Dämpfung von ungefähr 75dB ist die Verbindung so stark eingeschränkt, dass es unter anderem nicht mehr möglich ist sich mit dem Netzwerk zu verbinden und es zu Paketverlust kommt, sollte trotzdem eine Verbindung möglich sein liegt der Datendurchsatz bei 0. Somit kann man sehen, dass verschiedene Geräte die Störsignale im hohen dB-Bereich aussenden sich sehr negativ auf die Qualität des Netzwerkes auswirken.  
 
+'''
+
+== Diskussion
+Unsere Erwartungen an das Experiment wurden erfüllt. Wie wir bereits erwartet haben, hat sich ab einer gewissen Störfrequenz (bei uns ab ca. 35dB) sich der Datendurchsatz verschlechtert. Ebenfalls hat sich bewahrheitet, dass ab einer hohen Störfrequenz (bei uns ab ca. 75dB) das Netzwerk nicht mehr erreichbar ist. Somit haben wir festgestellt, dass bei einer Dämpfung kleiner als 35dB es zu einer optimalen Übertragung kommt. Zwischen 35dB und 75dB ist verschlechtert sich der Durchsatz zwar, die Verbindung bleibt aber bestehen.
+
+=== Mögliche Fehlerquellen:
+Anderweitige Script, welche auf den Geräten laufen und den Datenfluss regulieren oder auch anderweitig beeinflussen.
+Ebenso sind mögliche Fehlfunktionen des Attenuators und somit Schwankungen der Dämpfungswerte nicht auszuschließen.
+
+=== Mögliche Verbesserungen oder Erweiterungen des Experiments:
+Um das Experiment komplett ohne äußere Einflüsse laufen zu lassen, könnte man es in einem komplett abgeschirmten Raum ohne weitere drahtlose Geräte durchführen. Ebenso könnte man die Tests vielfach wiederholen, um so mögliche willkürliche Schwankungen zu verhindern.
+
+'''
+
+== Fazit
+Wie wir durch dieses Experiment gesehen haben, reichen selbst kleine Störfrequenzen aus um ein Wlan Signal negativ zu beeinflussen. Jedoch bedarf es einer hohen Dämpfung, um die Verbindung komplett zusammenbrechen zu lassen.
+
+== Literaturverzeichnis:
+https://www.tecmint.com/test-network-throughput-in-linux/ +
+https://github.com/thuehn/attenuator_script_python +
+https://man7.org/linux/man-pages/man7/namespaces.7.html +
+https://pad.riseup.net/p/scnx_iperf3-keep +
+https://www.linux-magazin.de/ausgaben/2016/06/network-namespaces/ 
