@@ -269,7 +269,6 @@ beziehungsweise ist der Durchsatz bei 0.
 Insgesamt liefern diese Tests wichtige Einblicke in die Leistungsfähigkeit und Zuverlässigkeit von Netzwerken unter verschiedenen Bedingungen und tragen dazu bei, die Netzwerkqualität zu optimieren.
 Ab einer Dämpfung von ungefähr 75dB ist die Verbindung so stark eingeschränkt, dass es unter anderem nicht mehr möglich ist sich mit dem Netzwerk zu verbinden und es zu Paketverlust kommt, sollte trotzdem eine Verbindung möglich sein liegt der Datendurchsatz bei 0. Somit kann man sehen, dass verschiedene Geräte die Störsignale im hohen dB-Bereich aussenden sich sehr negativ auf die Qualität des Netzwerkes auswirken.  
 
-'''
 
 == Diskussion
 Unsere Erwartungen an das Experiment wurden erfüllt. Wie wir bereits erwartet haben, hat sich ab einer gewissen Störfrequenz (bei uns ab ca. 35dB) sich der Datendurchsatz verschlechtert. Ebenfalls hat sich bewahrheitet, dass ab einer hohen Störfrequenz (bei uns ab ca. 75dB) das Netzwerk nicht mehr erreichbar ist. Somit haben wir festgestellt, dass bei einer Dämpfung kleiner als 35dB es zu einer optimalen Übertragung kommt. Zwischen 35dB und 75dB ist verschlechtert sich der Durchsatz zwar, die Verbindung bleibt aber bestehen.
@@ -281,7 +280,6 @@ Ebenso sind mögliche Fehlfunktionen des Attenuators und somit Schwankungen der 
 === Mögliche Verbesserungen oder Erweiterungen des Experiments:
 Um das Experiment komplett ohne äußere Einflüsse laufen zu lassen, könnte man es in einem komplett abgeschirmten Raum ohne weitere drahtlose Geräte durchführen. Ebenso könnte man die Tests vielfach wiederholen, um so mögliche willkürliche Schwankungen zu verhindern.
 
-'''
 
 == Fazit
 Wie wir durch dieses Experiment gesehen haben, reichen selbst kleine Störfrequenzen aus um ein Wlan Signal negativ zu beeinflussen. Jedoch bedarf es einer hohen Dämpfung, um die Verbindung komplett zusammenbrechen zu lassen.
