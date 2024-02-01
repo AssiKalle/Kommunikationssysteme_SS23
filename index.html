@@ -439,7 +439,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="einleitung">Einleitung</h2>
+<h2 id="_einleitung">Einleitung</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Das vorliegende Experiment befasst sich mit der Untersuchung der optimalen WLAN-Verbindung zwischen zwei BananaPi-Routern, die jeweils in einer Shielding Box platziert sind. Die beiden Router sind über einen gemeinsamen BananaPi-Controller verbunden, der wiederum über USB mit einem Attenuator, der als Dämpfungsglied fungiert, verbunden ist. Das Ziel des Experiments besteht darin, herauszufinden, welche Dämpfungen mit welchen Stärken und Mustern die schnellste Verbindung zwischen den beiden BananaPi-Routern ermöglichen. Durch die Variation der Dämpfungen sollen optimale Einstellungen ermittelt werden, um eine effiziente und zuverlässige WLAN-Kommunikation zwischen den beiden Geräten zu gewährleisten.</p>
@@ -448,19 +448,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_verwendung">Verwendung</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Das Ziel dieses Experiments besteht darin, die optimalen Dämpfungseinstellungen zu ermitteln, um die schnellstmögliche Verbindung zwischen den beiden BananaPi-Routern herzustellen. Dabei werden verschiedene Dämpfungen mit unterschiedlichen Stärken und Mustern getestet, um herauszufinden, welche Konfiguration die effizienteste und zuverlässigste WLAN-Kommunikation zwischen den Geräten ermöglicht. Durch die Variation der Dämpfungen werden die optimalen Einstellungen ermittelt, um eine optimale Übertragungsgeschwindigkeit und eine stabile Verbindung zwischen den BananaPi-Routern zu erreichen. Das Experiment trägt dazu bei, die WLAN-Performance zu maximieren und die bestmögliche Netzwerkleistung in diesem spezifischen Szenario zu erzielen.</p>
-</div>
-<div class="paragraph">
-<p>Das Experiment bietet die Möglichkeit, wertvolle Erkenntnisse über die optimale Konfiguration der Dämpfungen zu gewinnen und eine Grundlage für die Optimierung der WLAN-Verbindung zwischen den beiden BananaPi-Routern in einer Shielding Box zu schaffen. Die Ergebnisse können zur Verbesserung der Netzwerkleistung und Stabilität in ähnlichen Umgebungen beitragen.</p>
-</div>
-<hr>
-</div>
-</div>
-<div class="sect1">
-<h2 id="aufbau">Aufbau</h2>
+<h2 id="_experimentaufbau_und_methoden">Experimentaufbau und Methoden:</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Hier sehen sie den groben Aufbau des Projekts</p>
@@ -812,6 +800,11 @@ STOP</pre>
 </div>
 <hr>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_durchführung">Durchführung</h2>
+<div class="sectionbody">
 <div class="sect2">
 <h3 id="_versuch_starten">Versuch starten</h3>
 <div class="paragraph">
@@ -874,14 +867,23 @@ Der Plot für den <a href="https://github.com/AssiKalle/Kommunikationssysteme_SS
 </div>
 </div>
 <div class="sect1">
-<h2 id="_auswertung">Auswertung</h2>
+<h2 id="_ergebnisse">Ergebnisse:</h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_solotest">Solotest</h3>
 <div class="paragraph">
 <p>Ein Solotest ist ein Test, bei welchem über einen bestimmten Zeitraum nur ein definierter Dämpfungswert via IPerf aktiv getestet
 wird.
-Die geplotteten Bilder sind mit dem Datendurchsatz auf der Y-Achse, sowie die Zeit auf der X-Achse beschrieben.</p>
+Die geplotteten Bilder sind mit dem Datendurchsatz auf der Y-Achse, sowie die Zeit auf der X-Achse beschrieben.
+Für jeden Solotest muss die Dämpfung seperat in der <em>tables.csv</em> festgelegt werden. In dem Unten gezeigten Beispiel wurde eine Dämpfung von 35dB festgelegt.</p>
+</div>
+<div class="paragraph">
+<p>Solotest:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="solotest.png" alt="solotest">
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -889,31 +891,90 @@ Die geplotteten Bilder sind mit dem Datendurchsatz auf der Y-Achse, sowie die Ze
 <div class="paragraph">
 <p>Mittelwert und auch Median werden mit Hilfe mehrerer Solo-Testdaten berechnet und anschließend geplottet.
 Wobei sich hier die Achsen im Plot zu dem des Solotests unterschieden.
-Die X-Achse wird nun mit der Dämpfung in DB beschrieben.
+Die X-Achse wird nun mit der Dämpfung in dB beschrieben.
 Die Y-Achse ist weiterhin identisch und zeigt den Datendurchsatz.</p>
+</div>
+<div class="paragraph">
+<p>Mittelwert:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="mittelwert.png" alt="mittelwert">
+</div>
+</div>
+<div class="paragraph">
+<p>Median:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="median.png" alt="median">
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_wieso_wurden_diese_dämpfungswerte_gewählt">Wieso wurden diese Dämpfungswerte gewählt?</h3>
 <div class="paragraph">
-<p>Diese Dämpfungswerte wurden gewählt, da ab einer Frequenz von 35DB der Datendurchsatz sich erst anfängt zu ändern, dieser nimmt nun ab.
-Ab einer Frequenz von knapp 75DB schafft der iPerf-Client es nicht mehr sich mit dem iPerf-Server zu verbinden,
+<p>Diese Dämpfungswerte wurden gewählt, da ab einer Frequenz von 35dB der Datendurchsatz sich erst anfängt zu ändern, dieser nimmt nun ab.
+Ab einer Frequenz von knapp 75dB schafft der iPerf-Client es nicht mehr sich mit dem iPerf-Server zu verbinden,
 beziehungsweise ist der Durchsatz bei 0.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ergebnis_der_auswertung">Ergebnis der Auswertung:</h3>
+<h3 id="_ergebnisse_2">Ergebnisse:</h3>
 <div class="paragraph">
 <p>Insgesamt liefern diese Tests wichtige Einblicke in die Leistungsfähigkeit und Zuverlässigkeit von Netzwerken unter verschiedenen Bedingungen und tragen dazu bei, die Netzwerkqualität zu optimieren.
-Ab einer Dämpfung von ungefähr 75DB ist die Verbindung so stark eingeschränkt, dass es unter anderem nicht mehr möglich ist sich mit dem Netzwerk zu verbinden und es zu Paketverlust kommt, sollte trotzdem eine Verbindung möglich sein liegt der Datendurchsatz bei 0. Somit kann man sehen, dass verschiedene Geräte die Störsignale im hohen dB-Bereich aussenden sich sehr negativ auf die Qualität des Netzwerkes auswirken.</p>
+Ab einer Dämpfung von ungefähr 75dB ist die Verbindung so stark eingeschränkt, dass es unter anderem nicht mehr möglich ist sich mit dem Netzwerk zu verbinden und es zu Paketverlust kommt, sollte trotzdem eine Verbindung möglich sein liegt der Datendurchsatz bei 0. Somit kann man sehen, dass verschiedene Geräte die Störsignale im hohen dB-Bereich aussenden sich sehr negativ auf die Qualität des Netzwerkes auswirken.</p>
 </div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_diskussion">Diskussion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Unsere Erwartungen an das Experiment wurden erfüllt. Wie wir bereits erwartet haben, hat sich ab einer gewissen Störfrequenz (bei uns ab ca. 35dB) sich der Datendurchsatz verschlechtert. Ebenfalls hat sich bewahrheitet, dass ab einer hohen Störfrequenz (bei uns ab ca. 75dB) das Netzwerk nicht mehr erreichbar ist. Somit haben wir festgestellt, dass bei einer Dämpfung kleiner als 35dB es zu einer optimalen Übertragung kommt. Zwischen 35dB und 75dB ist verschlechtert sich der Durchsatz zwar, die Verbindung bleibt aber bestehen.</p>
+</div>
+<div class="sect2">
+<h3 id="_mögliche_fehlerquellen">Mögliche Fehlerquellen:</h3>
+<div class="paragraph">
+<p>Anderweitige Script, welche auf den Geräten laufen und den Datenfluss regulieren oder auch anderweitig beeinflussen.
+Ebenso sind mögliche Fehlfunktionen des Attenuators und somit Schwankungen der Dämpfungswerte nicht auszuschließen.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_mögliche_verbesserungen_oder_erweiterungen_des_experiments">Mögliche Verbesserungen oder Erweiterungen des Experiments:</h3>
+<div class="paragraph">
+<p>Um das Experiment komplett ohne äußere Einflüsse laufen zu lassen, könnte man es in einem komplett abgeschirmten Raum ohne weitere drahtlose Geräte durchführen. Ebenso könnte man die Tests vielfach wiederholen, um so mögliche willkürliche Schwankungen zu verhindern.</p>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_fazit">Fazit</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Wie wir durch dieses Experiment gesehen haben, reichen selbst kleine Störfrequenzen aus um ein Wlan Signal negativ zu beeinflussen. Jedoch bedarf es einer hohen Dämpfung, um die Verbindung komplett zusammenbrechen zu lassen.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_literaturverzeichnis">Literaturverzeichnis:</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://www.tecmint.com/test-network-throughput-in-linux/" class="bare">https://www.tecmint.com/test-network-throughput-in-linux/</a><br>
+<a href="https://github.com/thuehn/attenuator_script_python" class="bare">https://github.com/thuehn/attenuator_script_python</a><br>
+<a href="https://man7.org/linux/man-pages/man7/namespaces.7.html" class="bare">https://man7.org/linux/man-pages/man7/namespaces.7.html</a><br>
+<a href="https://pad.riseup.net/p/scnx_iperf3-keep" class="bare">https://pad.riseup.net/p/scnx_iperf3-keep</a><br>
+<a href="https://www.linux-magazin.de/ausgaben/2016/06/network-namespaces/" class="bare">https://www.linux-magazin.de/ausgaben/2016/06/network-namespaces/</a></p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-27 11:16:29 UTC
+Last updated 2024-02-01 13:44:43 UTC
 </div>
 </div>
 </body>
